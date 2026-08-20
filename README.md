@@ -1,14 +1,14 @@
 # Awaken The Lion
 
-A cinematic single-page web experience celebrating **Lumbini Lions** and **Red Paltan** — from the sacred birthplace of Buddha to NPL Season 2 champions.
+A personal portfolio showcase inspired by **Lumbini Lions** — from the sacred birthplace of Buddha to NPL Season 2 champions.
 
-> **Disclaimer:** Fan-made talent showcase. Not affiliated with or endorsed by Lumbini Lions.
+> **Disclaimer:** Fan-made portfolio project. Not affiliated with or endorsed by Lumbini Lions.
 
 ---
 
 ## Overview
 
-**Awaken The Lion** is a scroll-driven narrative site built as a design and front-end development portfolio piece. It presents seven chapters — Origin, Sacred Ground, The Pride, Squad, Champions, Music, and Showcase — using vanilla HTML, CSS, and JavaScript with GSAP, Lenis, and native media APIs.
+**Awaken The Lion** is a personal design and front-end development portfolio piece — a scroll-driven narrative site submitted as a Red Paltan talent showcase entry. It presents seven chapters using vanilla HTML, CSS, and JavaScript with GSAP, Lenis, and native media APIs.
 
 There is no backend, build pipeline, or JavaScript framework.
 
@@ -172,7 +172,7 @@ Netlify, Vercel, and Cloudflare Pages support static deployment with zero config
 This project's **source code** is licensed under the [MIT License](LICENSE).
 
 ```
-Copyright (c) 2026 Red Paltan
+© 2026 · Awaken The Lion · A fan showcase — not an official Lumbini Lions property
 ```
 
 Third-party media included in this repository — audio tracks, team imagery, video footage, and embedded YouTube content — may be subject to separate copyrights and terms of use. See [Credits](#credits) below.
@@ -181,15 +181,17 @@ Third-party media included in this repository — audio tracks, team imagery, vi
 
 ## Author
 
-**Red Paltan**  
-Lumbini, Nepal
+Personal portfolio project — designed and developed by the repository owner.
 
 | | |
 |---|---|
-| Email | [redpaltanlumbini@gmail.com](mailto:redpaltanlumbini@gmail.com) |
-| Phone | +977 976-6812227 |
+| **Project** | Awaken The Lion |
+| **Location** | Lumbini, Nepal |
+| **Showcase** | Red Paltan talent showcase entry |
+| **Email** | [redpaltanlumbini@gmail.com](mailto:redpaltanlumbini@gmail.com) |
+| **Phone** | +977 976-6812227 |
 
-Design, development, and creative direction for this showcase.
+Lumbini Lions are the **subject** of this work, not the author or copyright holder.
 
 ---
 
