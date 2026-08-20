@@ -1,0 +1,7 @@
+{
+  "name": "awaken-the-lion",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes serve . -p 3000"
+  }
+}

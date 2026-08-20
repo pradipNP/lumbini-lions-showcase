@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Awaken The Lion — A cinematic journey from the birthplace of Buddha to NPL champions. A Red Paltan talent showcase from Lumbini.">
+  <title>Awaken The Lion | From Lumbini, For The Pride</title>
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#9b0f0f">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Awaken The Lion | From Lumbini, For The Pride">
+  <meta property="og:description" content="A cinematic journey from the birthplace of Buddha to NPL champions. Red Paltan · Lumbini Lions.">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Awaken The Lion | From Lumbini, For The Pride">
+  <meta name="twitter:description" content="A cinematic journey from the birthplace of Buddha to NPL champions. Red Paltan · Lumbini Lions.">
+  <meta name="twitter:image" content="assets/images/og-image.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__om">ॐ</div>
+      <p class="preloader__text">Lumbini</p>
+      <p class="preloader__hint">Click to enter</p>
+      <div class="preloader__bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- Custom cursor — cricket bat -->
+  <div class="cricket-cursor" id="cricket-cursor" aria-hidden="true">
+    <svg class="cricket-cursor__bat" viewBox="0 0 32 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="batBlade" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#a08050"/>
+          <stop offset="50%" stop-color="#d4b896"/>
+          <stop offset="100%" stop-color="#a08050"/>
+        </linearGradient>
+        <linearGradient id="batHandle" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3d2810"/>
+          <stop offset="50%" stop-color="#6b4423"/>
+          <stop offset="100%" stop-color="#3d2810"/>
+        </linearGradient>
+      </defs>
+      <!-- Blade -->
+      <path d="M7 2 Q16 0 25 2 L27 52 Q16 56 5 52 Z" fill="url(#batBlade)" stroke="#7a5c2e" stroke-width="0.6"/>
+      <path d="M10 6 L22 6 L23 48 L9 48 Z" fill="rgba(255,255,255,0.12)"/>
+      <!-- Shoulder -->
+      <path d="M5 52 Q16 57 27 52 L26 58 Q16 62 6 58 Z" fill="#8b6914"/>
+      <!-- Handle -->
+      <rect x="13" y="58" width="6" height="40" rx="2" fill="url(#batHandle)"/>
+      <!-- Grip rings -->
+      <rect x="13" y="68" width="6" height="2" fill="#1a1008" opacity="0.6"/>
+      <rect x="13" y="74" width="6" height="2" fill="#1a1008" opacity="0.6"/>
+      <rect x="13" y="80" width="6" height="2" fill="#1a1008" opacity="0.6"/>
+      <!-- Handle end -->
+      <rect x="12" y="94" width="8" height="4" rx="1.5" fill="#2a1a0a"/>
+    </svg>
+  </div>
+  <div class="hit-fx-layer" id="hit-fx-layer" aria-hidden="true"></div>
+
+  <!-- Fixed UI -->
+  <header class="site-header" id="site-header">
+    <a href="#hero" class="logo">
+      <span class="logo__star">★</span>
+      <span class="logo__text">AWAKEN THE LION</span>
+    </a>
+    <button type="button" class="audio-toggle" id="audio-toggle" aria-label="Play Lion's Song">
+      <span class="audio-toggle__icon"></span>
+      <span class="audio-toggle__label">Lion's Song</span>
+    </button>
+  </header>
+
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+  <!-- Prayer flags -->
+  <div class="prayer-flags" aria-hidden="true">
+    <div class="flag flag--red"></div>
+    <div class="flag flag--gold"></div>
+    <div class="flag flag--white"></div>
+    <div class="flag flag--blue"></div>
+    <div class="flag flag--red"></div>
+  </div>
+
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <main id="main-content">
+
+    <!-- ═══ CHAPTER I: ORIGIN ═══ -->
+    <section class="panel panel--hero" id="hero" data-chapter="0">
+      <div class="hero-video-wrap" aria-hidden="true">
+        <video
+          id="hero-video"
+          class="hero-video"
+          src="assets/video/stupa.mp4"
+          loop
+          playsinline
+          muted
+          autoplay
+          preload="auto"
+        ></video>
+      </div>
+      <div class="panel__overlay panel__overlay--hero"></div>
+      <div class="panel__content">
+        <p class="eyebrow reveal">UNESCO World Heritage · Rupandehi, Nepal</p>
+        <h1 class="hero-title reveal">
+          <span class="hero-title__line">FROM THE LAND</span>
+          <span class="hero-title__line hero-title__line--gold">OF PEACE</span>
+        </h1>
+        <p class="hero-sub reveal">Where Siddhartha Gautama was born · 563 BCE</p>
+        <div class="hero-coords reveal">
+          <span>27.4814° N</span>
+          <span class="divider">·</span>
+          <span>83.2758° E</span>
+        </div>
+        <a href="#sacred" class="scroll-cue reveal" aria-label="Scroll to sacred ground">
+          <span>Descend into Lumbini</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 16l-6-6h12z"/></svg>
+        </a>
+      </div>
+      <div class="buddha-silhouette" aria-hidden="true"></div>
+    </section>
+
+    <!-- ═══ CHAPTER II: SACRED GROUND ═══ -->
+    <section class="panel panel--sacred" id="sacred" data-chapter="1">
+      <div class="sacred-grid">
+        <article class="sacred-card sacred-card--dim reveal">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/MayaDevi_Temple%2C_Lumbini.jpg/960px-MayaDevi_Temple%2C_Lumbini.jpg"
+            alt="Maya Devi Temple spiritual heart of Lumbini"
+            loading="lazy"
+            width="960"
+            height="640"
+          >
+          <div class="sacred-card__caption">
+            <h3>Sacred Garden</h3>
+            <p>Prayer flags · Bodhi tree · Monks in saffron</p>
+          </div>
+        </article>
+
+        <article class="sacred-card sacred-card--dim reveal">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Lumbini_-_Mayadevi_Temple_from_North%2C_Lumbini_%289241471399%29.jpg/1280px-Lumbini_-_Mayadevi_Temple_from_North%2C_Lumbini_%289241471399%29.jpg"
+            alt="Mayadevi Temple from North, Lumbini Nepal"
+            loading="lazy"
+            width="1280"
+            height="960"
+          >
+          <div class="sacred-card__caption">
+            <h3>Ashoka Pillar</h3>
+            <p>Ancient monument marking the birthplace · 249 BCE</p>
+          </div>
+        </article>
+      </div>
+
+      <blockquote class="buddha-quote reveal">
+        <p class="buddha-quote__en">"Peace comes from within. Do not seek it without."</p>
+        <p class="buddha-quote__ne">शान्ति भित्रबाट आउँछ। बाहिर नखोज।</p>
+        <cite>— The Buddha</cite>
+      </blockquote>
+
+      <div class="transition-bridge reveal">
+        <p class="transition-bridge__text">But from this same soil of serenity...</p>
+        <div class="transition-bridge__line"></div>
+        <p class="transition-bridge__text transition-bridge__text--fire">A different kind of roar was born.</p>
+      </div>
+    </section>
+
+    <!-- ═══ CHAPTER III: THE PRIDE ═══ -->
+    <section class="panel panel--pride" id="pride" data-chapter="2">
+      <div class="panel__bg panel__bg--red" data-parallax="0.2"></div>
+      <div class="panel__content panel__content--wide">
+        <p class="eyebrow eyebrow--gold reveal">Red Paltan · Lumbini Lions</p>
+        <h2 class="section-title reveal">
+          <span>A PRIDE RISES</span>
+          <span class="section-title__sub">FROM LUMBINI</span>
+        </h2>
+        <p class="section-lead reveal">
+          Named for the land that gave the world Buddha — the Lumbini Lions carry that same spirit:
+          calm under pressure, unstoppable when awakened.
+        </p>
+
+        <div class="pride-visual reveal">
+          <div class="lion-logo">
+            <img
+              src="assets/images/logo.jpg"
+              alt="Lumbini Lions official logo"
+              class="lion-logo__img"
+              width="220"
+              height="220"
+            >
+          </div>
+          <div class="pride-stats">
+            <div class="stat-card reveal">
+              <span class="stat-card__num" data-count="2024">0</span>
+              <span class="stat-card__label">Founded</span>
+            </div>
+            <div class="stat-card reveal">
+              <span class="stat-card__num">Lumbini</span>
+              <span class="stat-card__label">Province</span>
+            </div>
+            <div class="stat-card reveal">
+              <span class="stat-card__num">Red Paltan</span>
+              <span class="stat-card__label">The Army</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="nepali-callout reveal">
+          <span class="nepali-callout__text">लु HERUM न त!</span>
+          <span class="nepali-callout__sub">Watch. Witness. Rise.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ CHAPTER IV: THE SQUAD ═══ -->
+    <section class="panel panel--squad" id="squad" data-chapter="3">
+      <div class="squad-header reveal">
+        <p class="eyebrow eyebrow--gold">Official Squad · NPL Season 2</p>
+        <h2 class="section-title">THE PRIDE</h2>
+        <p class="section-lead">
+          Meet the Lions who roared from Lumbini to the top of Nepal —
+          sourced from the official Lumbini Lions squad.
+        </p>
+      </div>
+
+      <div class="squad-layout reveal">
+        <div class="squad-row squad-row--captain">
+          <article class="player-card player-card--captain">
+            <img
+              src="assets/images/rohit.png"
+              alt="Rohit Paudel"
+              class="player-card__photo"
+              width="140"
+              height="140"
+              loading="lazy"
+            >
+            <span class="player-card__role">Captain · Marquee</span>
+            <h3 class="player-card__name">Rohit Paudel</h3>
+            <span class="player-card__type">Batting All-Rounder</span>
+          </article>
+        </div>
+
+        <div class="squad-row squad-row--international">
+          <article class="player-card player-card--international">
+            <span class="player-card__role">International</span>
+            <h3 class="player-card__name">D'Arcy Short</h3>
+            <span class="player-card__type">Batting All-Rounder</span>
+          </article>
+          <article class="player-card player-card--international">
+            <span class="player-card__role">International</span>
+            <h3 class="player-card__name">Niroshan Dickwella</h3>
+            <span class="player-card__type">Wicketkeeper-Batsman</span>
+          </article>
+          <article class="player-card player-card--international">
+            <span class="player-card__role">International</span>
+            <h3 class="player-card__name">Gulbadin Naib</h3>
+            <span class="player-card__type">Batting All-Rounder</span>
+          </article>
+          <article class="player-card player-card--international">
+            <span class="player-card__role">International</span>
+            <h3 class="player-card__name">Ruben Trumpelmann</h3>
+            <span class="player-card__type">Bowler</span>
+          </article>
+          <article class="player-card player-card--international">
+            <span class="player-card__role">International</span>
+            <h3 class="player-card__name">JJ Smit</h3>
+            <span class="player-card__type">Bowling All-Rounder</span>
+          </article>
+        </div>
+
+        <div class="squad-row squad-row--domestic">
+          <article class="player-card">
+            <h3 class="player-card__name">Dinesh Adhikari</h3>
+            <span class="player-card__type">Bowler</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Sher Malla</h3>
+            <span class="player-card__type">All-Rounder</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Dilip Nath</h3>
+            <span class="player-card__type">Wicketkeeper-Batsman</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Sundeep Jora</h3>
+            <span class="player-card__type">Batsman</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Tilak Bhandari</h3>
+            <span class="player-card__type">Bowler</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Abhishesh Gautam</h3>
+            <span class="player-card__type">Bowler</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Durgesh Gupta</h3>
+            <span class="player-card__type">All-Rounder</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Aadil Khan</h3>
+            <span class="player-card__type">Wicketkeeper-Batsman</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Bishal Patel</h3>
+            <span class="player-card__type">Batsman</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Thomas Jack Draca</h3>
+            <span class="player-card__type">Bowler</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Sumit Maharjan</h3>
+            <span class="player-card__type">Batsman</span>
+          </article>
+          <article class="player-card">
+            <h3 class="player-card__name">Movin Subasingha</h3>
+            <span class="player-card__type">All-Rounder</span>
+          </article>
+        </div>
+      </div>
+
+      <p class="squad-source reveal">
+        <a href="https://lumbinilions.com.np/our-squad" target="_blank" rel="noopener">View full player profiles → lumbinilions.com.np</a>
+      </p>
+    </section>
+
+    <!-- ═══ CHAPTER V: CHAMPIONS ═══ -->
+    <section class="panel panel--champions" id="champions" data-chapter="4">
+      <div class="champions-header reveal">
+        <p class="eyebrow">NPL Season 2 · December 13, 2025</p>
+        <h2 class="section-title section-title--champion">
+          <span class="trophy-icon" aria-hidden="true">🏆</span>
+          CHAMPIONS
+        </h2>
+        <p class="section-lead">
+          From bottom of the table in Season 1 to lifting the trophy at TU Cricket Ground, Kirtipur —
+          the greatest turnaround in Nepal Premier League history.
+        </p>
+      </div>
+
+      <div class="final-score reveal">
+        <div class="final-score__team">
+          <span class="final-score__name">Sudurpaschim Royals</span>
+          <span class="final-score__runs">85/10</span>
+          <span class="final-score__detail">19.1 overs</span>
+        </div>
+        <div class="final-score__vs">FINAL</div>
+        <div class="final-score__team final-score__team--winner">
+          <div class="celebration" aria-hidden="true">
+            <span class="celebration__popper celebration__popper--left"></span>
+            <span class="celebration__popper celebration__popper--right"></span>
+          </div>
+          <span class="final-score__badge">Champions</span>
+          <span class="final-score__name">Lumbini Lions</span>
+          <span class="final-score__runs">86/4</span>
+          <span class="final-score__detail">9 overs · Won by 6 wickets</span>
+        </div>
+      </div>
+
+      <div class="moments-track" id="moments-track">
+        <div class="moments-track__inner">
+          <article class="moment-card">
+            <span class="moment-card__num">01</span>
+            <h3>The Collapse</h3>
+            <p>Sudurpaschim bowled out for 85 — the lowest final total in NPL history. Ruben Trumpelmann and Sher Malla took 3 wickets each.</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-card__num">02</span>
+            <h3>The Hat-trick</h3>
+            <p>Captain Rohit Paudel's hat-trick in the 11th over — 12 runs from his spell. Leadership when it mattered most.</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-card__num">03</span>
+            <h3>Four Sixes. One Over.</h3>
+            <p>Dinesh Adhikari exploded with 42 off 13 balls — four sixes in the opening over of the chase. Pure Red Paltan fury.</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-card__num">04</span>
+            <h3>Six Straight Wins</h3>
+            <p>From crisis to coronation — six consecutive victories, equalling the season's longest winning streak.</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-card__num">05</span>
+            <h3>Fireworks at Kirtipur</h3>
+            <p>Dilip Nath sealed the winning run. Maiden NPL title. Lumbini Lions — champions of Nepal.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="champions-gallery reveal">
+        <figure class="gallery-item gallery-item--photo">
+          <img
+            src="assets/images/champions.jpg"
+            alt="Lumbini Lions celebrate winning NPL Season 2"
+            loading="lazy"
+          >
+          <figcaption>NPL Season 2 Champions · December 13, 2025</figcaption>
+        </figure>
+        <figure class="gallery-item gallery-item--accent">
+          <img src="assets/images/logo.jpg" alt="Lumbini Lions" class="gallery-item__logo">
+          <div class="gallery-item__text">
+            <p>"No matter how you start, finish it like Lumbini Lions."</p>
+            <span>— Season Recap, lumbinilions.com.np</span>
+          </div>
+        </figure>
+      </div>
+
+      <p class="source-note reveal">
+        Match facts sourced from
+        <a href="https://lumbinilions.com.np/lumbini-lions-wins-the-npl-2025!" target="_blank" rel="noopener">Lumbini Lions Official</a>,
+        <a href="https://kathmandupost.com/cricket/2025/12/13/lumbini-lions-crowned-npl-champions-with-commanding-final-win" target="_blank" rel="noopener">The Kathmandu Post</a>
+      </p>
+    </section>
+
+    <!-- ═══ CHAPTER VI: MUSIC ═══ -->
+    <section class="panel panel--music" id="anthem" data-chapter="5">
+      <div class="music-wrap reveal">
+        <p class="eyebrow eyebrow--gold">The Official Sound</p>
+        <h2 class="section-title">SOUNDS OF THE PRIDE</h2>
+        <p class="section-lead">Feel the pride. Hear the roar.</p>
+
+        <div class="music-controls">
+          <button type="button" class="music-btn music-btn--active" id="play-lions-song" data-player="song">
+            <span class="music-btn__icon">▶</span>
+            <span>Lion's Song</span>
+          </button>
+          <button type="button" class="music-btn" id="play-anthem-video" data-player="anthem">
+            <span class="music-btn__icon">▶</span>
+            <span>Anthem</span>
+          </button>
+        </div>
+
+        <div class="visualizer" id="visualizer" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="music-grid">
+          <article class="music-column">
+            <h3 class="music-column__title">Lion's Song</h3>
+            <div class="music-player__frame">
+              <div id="youtube-player-song"></div>
+            </div>
+          </article>
+          <article class="music-column">
+            <h3 class="music-column__title">Anthem</h3>
+            <div class="music-player__frame">
+              <div id="youtube-player-anthem"></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CHAPTER VII: SHOWCASE ═══ -->
+    <section class="panel panel--showcase" id="showcase" data-chapter="6">
+      <div class="showcase-inner">
+        <div class="showcase-badge reveal">Red Paltan · Talent Showcase · Design</div>
+        <h2 class="showcase-title reveal">
+          THIS IS MY<br>
+          <span class="showcase-title__accent">SHOWCASE</span>
+        </h2>
+        <p class="showcase-lead reveal">
+          I am from Lumbini — the same soil that birthed Buddha and now roars for the Lions.
+          I built this experience as my entry: a cinematic web journey honouring our land,
+          our faith, and our champions.
+        </p>
+
+        <div class="showcase-features reveal">
+          <div class="feature">
+            <span class="feature__icon">🎨</span>
+            <h3>Design</h3>
+            <p>Cinematic layout · Red & gold identity · Lumbini atmosphere</p>
+          </div>
+          <div class="feature">
+            <span class="feature__icon">⚡</span>
+            <h3>Development</h3>
+            <p>HTML5 · CSS3 · Vanilla JS · GSAP · Zero frameworks</p>
+          </div>
+          <div class="feature">
+            <span class="feature__icon">📖</span>
+            <h3>Story</h3>
+            <p>Peace to power · Buddha to Lions · S1 struggle to S2 glory</p>
+          </div>
+        </div>
+
+        <div class="showcase-tech reveal">
+          <p>Built with love from Lumbini, Nepal 🇳🇵</p>
+          <p class="showcase-tech__tag">AWAKEN THE LION — v1.0</p>
+        </div>
+
+        <div class="showcase-cta reveal">
+          <a href="mailto:redpaltanlumbini@gmail.com" class="btn btn--gold">Contact Red Paltan</a>
+          <a href="tel:+9779766812227" class="btn btn--outline">+977 976-6812227</a>
+        </div>
+
+        <footer class="site-footer reveal">
+          <p>Images: Wikimedia Commons (CC BY-SA) · Lumbini heritage photography</p>
+          <p>Lion's Song: <a href="https://youtu.be/J_Ah9Yy9W8U" target="_blank" rel="noopener">youtu.be/J_Ah9Yy9W8U</a></p>
+          <p>Anthem: <a href="https://youtu.be/ZsTniyGi0pU" target="_blank" rel="noopener">youtu.be/ZsTniyGi0pU</a></p>
+          <p class="site-footer__copy">© 2026 · Awaken The Lion · A fan showcase — not an official Lumbini Lions property</p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lion roar — plays once when entering Pride section -->
+  <audio id="lion-audio" src="assets/audio/lion.mp3" preload="auto" playsinline></audio>
+  <audio id="lions-song-audio" src="assets/audio/song.mp3" preload="metadata" playsinline></audio>
+
+  <!-- Hidden YouTube iframe target -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
