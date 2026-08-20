@@ -18,8 +18,8 @@ There is no backend, build pipeline, or JavaScript framework.
 
 | | |
 |---|---|
-| **Production** | _Deploy URL pending_ |
-| **Repository** | [github.com](https://github.com) _(update with your repo URL)_ |
+| **Production** | [awaken-the-lion.pages.dev](https://awaken-the-lion.pages.dev/) |
+| **Repository** | [github.com](https://github.com/pradipNP/lumbini-lions-showcase) |
 
 ---
 

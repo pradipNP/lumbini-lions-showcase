@@ -1,0 +1,12 @@
+/assets/audio/*
+  Content-Type: audio/mpeg
+  Access-Control-Allow-Origin: *
+
+/assets/video/*
+  Content-Type: video/mp4
+
+/assets/images/*
+  Cache-Control: public, max-age=86400
+
+/favicon.ico
+  Content-Type: image/x-icon

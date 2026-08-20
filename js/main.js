@@ -622,22 +622,18 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
   const prideSection = document.getElementById('pride');
   const sacredSection = document.getElementById('sacred');
   const heroSection = document.getElementById('hero');
-  const preloader = document.getElementById('preloader');
   if (!lionEl || !prideSection || reducedMotion) return;
 
   let armed = true;
   let isPlaying = false;
   let audioUnlocked = false;
   let inPrideZone = false;
+  let pendingRoar = false;
 
-  if (window.location.protocol === 'file:') {
-    console.info(
-      'Awaken The Lion: Chrome blocks sound on file:// pages. Click the preloader, or run "npm start" and open http://localhost:3000',
-    );
-  }
+  lionEl.load();
 
   lionEl.addEventListener('error', () => {
-    console.warn('Lion roar failed to load — use a local server (npm start) instead of opening index.html directly.');
+    console.warn('Lion roar audio failed to load. Check assets/audio/lion.mp3 is deployed.');
   });
 
   function onUserGesture() {
@@ -671,31 +667,19 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
     }
   }
 
-  function bindUnlock(el) {
-    if (!el) return;
-    ['pointerdown', 'touchstart', 'click', 'keydown'].forEach((evt) => {
-      el.addEventListener(evt, onUserGesture, { passive: true });
-    });
-  }
-
-  bindUnlock(preloader);
-  bindUnlock(document.getElementById('site-header'));
-  bindUnlock(document.getElementById('main-content'));
-
-  if (lenis) {
-    lenis.on('scroll', () => {
-      if (!audioUnlocked) onUserGesture();
-    });
-  }
+  /* Any click/tap/key unlocks audio — required by browser autoplay policy */
+  document.addEventListener('pointerdown', onUserGesture, { capture: true, passive: true });
+  document.addEventListener('keydown', onUserGesture, { passive: true });
 
   function playRoar() {
     if (!armed || isPlaying) return;
 
     if (!audioUnlocked) {
-      unlockAudio();
+      pendingRoar = true;
       return;
     }
 
+    pendingRoar = false;
     isPlaying = true;
     lionEl.currentTime = 0;
     lionEl.volume = 1;
@@ -706,6 +690,7 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
       })
       .catch(() => {
         isPlaying = false;
+        pendingRoar = true;
       });
   }
 
@@ -722,7 +707,7 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
   /* Roar when scrolling down into Pride (Chapter III) */
   ScrollTrigger.create({
     trigger: prideSection,
-    start: 'top 72%',
+    start: 'top 75%',
     end: 'bottom top',
     onEnter: () => {
       inPrideZone = true;
@@ -730,6 +715,7 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
     },
     onLeaveBack: () => {
       inPrideZone = false;
+      pendingRoar = false;
     },
     onLeave: () => {
       inPrideZone = false;
@@ -747,6 +733,10 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
       onEnterBack: rearm,
     });
   });
+
+  /* Refresh triggers after layout, preloader, and media settle */
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+  setTimeout(() => ScrollTrigger.refresh(), 3000);
 }
 
 /* ==========================================================================
