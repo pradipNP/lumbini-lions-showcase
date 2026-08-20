@@ -180,6 +180,57 @@ function onYTStateChange(event, which) {
 
 
 /* ==========================================================================
+   Shared page audio unlock (browser autoplay policy)
+   ========================================================================== */
+
+const pageAudio = {
+  unlocked: false,
+  _listeners: new Set(),
+
+  onUnlocked(fn) {
+    this._listeners.add(fn);
+    if (this.unlocked) fn();
+  },
+
+  markUnlocked() {
+    if (this.unlocked) return;
+    this.unlocked = true;
+    this._listeners.forEach((fn) => fn());
+  },
+
+  unlockFromGesture() {
+    if (this.unlocked) return Promise.resolve();
+
+    const songEl = document.getElementById('lions-song-audio');
+    const lionEl = document.getElementById('lion-audio');
+    const elements = [songEl, lionEl].filter(Boolean);
+
+    const silentUnlock = (index) => {
+      if (index >= elements.length) return Promise.resolve();
+      const el = elements[index];
+      const savedVolume = el.volume;
+      el.volume = 0;
+      el.currentTime = 0;
+
+      return el.play()
+        .then(() => {
+          el.pause();
+          el.currentTime = 0;
+          el.volume = savedVolume;
+          this.markUnlocked();
+        })
+        .catch(() => {
+          el.volume = savedVolume;
+          return silentUnlock(index + 1);
+        });
+    };
+
+    return silentUnlock(0);
+  },
+};
+
+
+/* ==========================================================================
    Header song toggle — MP3 (audio-toggle button)
    ========================================================================== */
 
@@ -187,6 +238,8 @@ function initHeaderSongToggle() {
   const audioToggle = document.getElementById('audio-toggle');
   const songEl = document.getElementById('lions-song-audio');
   if (!audioToggle || !songEl) return;
+
+  songEl.addEventListener('play', () => pageAudio.markUnlocked());
 
   function updateToggleUI() {
     const playing = !songEl.paused && !songEl.ended;
@@ -196,7 +249,9 @@ function initHeaderSongToggle() {
 
   audioToggle.addEventListener('click', () => {
     if (songEl.paused) {
-      songEl.play().catch(() => {});
+      pageAudio.unlockFromGesture().finally(() => {
+        songEl.play().catch(() => {});
+      });
     } else {
       songEl.pause();
     }
@@ -256,7 +311,10 @@ function init() {
     ScrollTrigger.refresh();
   }
 
-  preloader?.addEventListener('pointerdown', finishIntro, { passive: true });
+  preloader?.addEventListener('pointerdown', () => {
+    pageAudio.unlockFromGesture();
+    finishIntro();
+  }, { passive: true });
 
   /* ── Particles ── */
   const particles = new ParticleField(document.getElementById('particle-canvas'));
@@ -626,9 +684,7 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
 
   let armed = true;
   let isPlaying = false;
-  let audioUnlocked = false;
   let inPrideZone = false;
-  let pendingRoar = false;
 
   lionEl.load();
 
@@ -638,48 +694,29 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
 
   function onUserGesture() {
     finishIntro?.();
-    unlockAudio();
-  }
-
-  function unlockAudio() {
-    if (audioUnlocked) return Promise.resolve();
-
-    const savedVolume = lionEl.volume;
-    lionEl.volume = 0;
-    lionEl.currentTime = 0;
-
-    return lionEl.play()
-      .then(() => {
-        lionEl.pause();
-        lionEl.currentTime = 0;
-        lionEl.volume = savedVolume;
-        audioUnlocked = true;
-        tryRoarIfReady();
-      })
-      .catch(() => {
-        lionEl.volume = savedVolume;
-      });
+    pageAudio.unlockFromGesture();
   }
 
   function tryRoarIfReady() {
-    if (inPrideZone && armed && !isPlaying && audioUnlocked) {
+    if (inPrideZone && armed && !isPlaying && pageAudio.unlocked) {
       playRoar();
     }
   }
 
-  /* Any click/tap/key unlocks audio — required by browser autoplay policy */
+  pageAudio.onUnlocked(tryRoarIfReady);
+
   document.addEventListener('pointerdown', onUserGesture, { capture: true, passive: true });
+  document.addEventListener('touchstart', onUserGesture, { capture: true, passive: true });
   document.addEventListener('keydown', onUserGesture, { passive: true });
 
   function playRoar() {
     if (!armed || isPlaying) return;
 
-    if (!audioUnlocked) {
-      pendingRoar = true;
+    if (!pageAudio.unlocked) {
+      pageAudio.unlockFromGesture().then(tryRoarIfReady);
       return;
     }
 
-    pendingRoar = false;
     isPlaying = true;
     lionEl.currentTime = 0;
     lionEl.volume = 1;
@@ -690,7 +727,6 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
       })
       .catch(() => {
         isPlaying = false;
-        pendingRoar = true;
       });
   }
 
@@ -715,7 +751,6 @@ function initLionAudio(reducedMotion, lenis, finishIntro) {
     },
     onLeaveBack: () => {
       inPrideZone = false;
-      pendingRoar = false;
     },
     onLeave: () => {
       inPrideZone = false;
